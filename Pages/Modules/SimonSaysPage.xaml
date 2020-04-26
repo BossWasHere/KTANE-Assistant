@@ -1,0 +1,123 @@
+﻿<api:ModulePage x:Class="KTANEAssistant.Pages.Modules.SimonSaysPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:api="clr-namespace:KTANEAssistant.API"
+      xmlns:moduleinfo="clr-namespace:KTANEAssistant.ModuleData"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SimonSaysPage" x:Name="PageSimonSays">
+
+    <Grid>
+        <Grid.Resources>
+            <RotateTransform x:Key="AngleTransform" Angle="45"/>
+            <Style x:Key="StackPanelTransform" TargetType="{x:Type StackPanel}">
+                <Setter Property="LayoutTransform" Value="{StaticResource AngleTransform}"/>
+            </Style>
+            <Style TargetType="{x:Type Button}" x:Key="SimonButton">
+                <Setter Property="Width" Value="80"/>
+                <Setter Property="Height" Value="80"/>
+                <Setter Property="Command" Value="{Binding Path=SimonEnterColorEvent, ElementName=PageSimonSays}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="SimonPanel" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource StackPanelTransform}" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource SimonButton}">
+                    <Button.CommandParameter>
+                        <moduleinfo:SimonColors>Blue</moduleinfo:SimonColors>
+                    </Button.CommandParameter>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border>
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource ColorButtonBorder}">
+                                        <Setter Property="Background" Value="#FF0000CD"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FF000074"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Style="{StaticResource SimonButton}">
+                    <Button.CommandParameter>
+                        <moduleinfo:SimonColors>Yellow</moduleinfo:SimonColors>
+                    </Button.CommandParameter>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border>
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource ColorButtonBorder}">
+                                        <Setter Property="Background" Value="#FFFFFF00"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFA6A600"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource SimonButton}">
+                    <Button.CommandParameter>
+                        <moduleinfo:SimonColors>Red</moduleinfo:SimonColors>
+                    </Button.CommandParameter>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border>
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource ColorButtonBorder}">
+                                        <Setter Property="Background" Value="#FFDC143C"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FF830000"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Style="{StaticResource SimonButton}">
+                    <Button.CommandParameter>
+                        <moduleinfo:SimonColors>Green</moduleinfo:SimonColors>
+                    </Button.CommandParameter>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border>
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource ColorButtonBorder}">
+                                        <Setter Property="Background" Value="#FF32CD32"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FF007400"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</api:ModulePage>

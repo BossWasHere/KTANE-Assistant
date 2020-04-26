@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="KTANEAssistant.Controls.ColorSelectBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             x:Name="ControlColorSelectBox">
+    <ItemsControl x:Name="ItemContainer" ItemsSource="{Binding Path=ColorSelection, ElementName=ControlColorSelectBox}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Button Width="40" Height="40" Margin="2" Command="{Binding Path=SelectionCommand, ElementName=ControlColorSelectBox}" CommandParameter="{Binding}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border>
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource ColorButtonBorder}">
+                                        <Setter Property="Background" Value="{Binding}"/>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

@@ -1,0 +1,92 @@
+﻿<Page x:Class="KTANEAssistant.Pages.SetupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:api="clr-namespace:KTANEAssistant.API"
+      xmlns:controls="clr-namespace:KTANEAssistant.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SetupPage" x:Name="PageSetup">
+
+    <Grid>
+        <Grid.Resources>
+            <ObjectDataProvider x:Key="IndicatorConstants" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="api:Indicators"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBarPanel x:Name="TopToolbar" ToolBarTray.IsLocked="True">
+            <Menu ToolBar.OverflowMode="Never">
+                <MenuItem Header="Home" Command="{Binding MenuClickHome}" Height="{Binding ElementName=TopToolbar,Path=ActualHeight}"/>
+                <MenuItem Header="Settings" Command="{Binding MenuClickSettings}"/>
+                <MenuItem Header="Return to Bomb" Command="{Binding MenuClickDefusal}"/>
+            </Menu>
+        </ToolBarPanel>
+        <StackPanel Grid.Row="1" Margin="6" DataContext="{Binding Bomb}">
+            <TextBlock FontSize="20" Margin="0 0 0 8">Configure Bomb</TextBlock>
+            <DockPanel>
+                <TextBlock>Serial Number #</TextBlock>
+                <TextBox MaxLength="6" Text="{Binding SerialNumber}"></TextBox>
+            </DockPanel>
+            <DockPanel LastChildFill="False">
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Margin" Value="6 0"/>
+                    </Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0 8"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                </DockPanel.Resources>
+                <StackPanel>
+                    <TextBlock>Batteries</TextBlock>
+                    <controls:NumberButtonInput Width="135" Height="50" Min="0" Max="20" Value="{Binding Batteries}" HorizontalAlignment="Left"></controls:NumberButtonInput>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock>Battery Holders</TextBlock>
+                    <controls:NumberButtonInput Width="135" Height="50" Min="0" Max="10" Value="{Binding BatteryHolders}" HorizontalAlignment="Left"></controls:NumberButtonInput>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock>Strikes</TextBlock>
+                    <controls:NumberButtonInput Width="135" Height="50" Min="0" Max="2" Value="{Binding Strikes}" HorizontalAlignment="Left"></controls:NumberButtonInput>
+                </StackPanel>
+                <Button Height="50" Click="ResetBomb_Click">Reset</Button>
+            </DockPanel>
+            <TextBlock Margin="0 8">Ports</TextBlock>
+            <WrapPanel Orientation="Horizontal">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                        <Setter Property="MinWidth" Value="80"/>
+                        <Setter Property="Margin" Value="5 0"/>
+                    </Style>
+                </WrapPanel.Resources>
+                <CheckBox IsChecked="{Binding DVIPort}">DVI-D</CheckBox>
+                <CheckBox IsChecked="{Binding ParallelPort}">Parallel</CheckBox>
+                <CheckBox IsChecked="{Binding PS2Port}">PS/2</CheckBox>
+                <CheckBox IsChecked="{Binding RJ45Port}">RJ-45</CheckBox>
+                <CheckBox IsChecked="{Binding SerialPort}">Serial</CheckBox>
+                <CheckBox IsChecked="{Binding StereoRCAPort}">Stereo RCA</CheckBox>
+            </WrapPanel>
+            <TextBlock Margin="0 8">Indicators</TextBlock>
+            <ItemsControl x:Name="IndicatorSet" ItemsSource="{Binding Source={StaticResource IndicatorConstants}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:IndicatorStatus x:Name="IndicatorItem" StatusChanged="IndicatorStatus_StatusChanged" Width="40" Height="120" Tag="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</Page>

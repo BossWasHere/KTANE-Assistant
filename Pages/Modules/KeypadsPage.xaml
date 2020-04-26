@@ -1,0 +1,93 @@
+﻿<api:ModulePage x:Class="KTANEAssistant.Pages.Modules.KeypadsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:api="clr-namespace:KTANEAssistant.API"
+      xmlns:conv="clr-namespace:KTANEAssistant.Converter"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="KeypadsPage" x:Name="PageKeypads">
+
+    <Page.Resources>
+        <conv:DivisibilityConverter x:Key="DivisibilityConverter"/>
+    </Page.Resources>
+
+    <StackPanel x:Name="MainPanel" Grid.ColumnSpan="3">
+        <TextBlock Margin="2" TextWrapping="Wrap">Select the symbols from the grid below. Only symbols that are in the same set can be selected.</TextBlock>
+        <TextBlock Margin="2" TextWrapping="Wrap">Press the 'Reset' button to clear your selection</TextBlock>
+        <ListBox x:Name="MainSelection" SelectionMode="Multiple" ItemsSource="{Binding Path=ImageCollection, ElementName=PageKeypads}" SelectionChanged="ListBox_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top">
+            <ListBox.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="MaxWidth" Value="256"/>
+                    <Setter Property="MaxHeight" Value="256"/>
+                    <Setter Property="Width">
+                        <Setter.Value>
+                            <Binding ElementName="MainPanel" Path="ActualWidth" Converter="{StaticResource DivisibilityConverter}" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>11</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.2"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <DockPanel HorizontalAlignment="Center">
+            <DockPanel.Resources>
+                <Style x:Key="LargeOutputImage" TargetType="{x:Type Image}">
+                    <Setter Property="MaxWidth" Value="256"/>
+                    <Setter Property="MaxHeight" Value="256"/>
+                    <Setter Property="Width">
+                        <Setter.Value>
+                            <Binding ElementName="MainPanel" Path="ActualWidth" Converter="{StaticResource DivisibilityConverter}" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>8</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+            </DockPanel.Resources>
+            <Border Style="{StaticResource ColorButtonBorder}" Margin="10">
+                <StackPanel Margin="2">
+                    <TextBlock>1st</TextBlock>
+                    <Image Style="{StaticResource LargeOutputImage}" x:Name="ImageA"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource ColorButtonBorder}" Margin="10">
+                <StackPanel Margin="2">
+                    <TextBlock>2nd</TextBlock>
+                    <Image Style="{StaticResource LargeOutputImage}" x:Name="ImageB"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource ColorButtonBorder}" Margin="10">
+                <StackPanel Margin="2">
+                    <TextBlock>3rd</TextBlock>
+                    <Image Style="{StaticResource LargeOutputImage}" x:Name="ImageC"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource ColorButtonBorder}" Margin="10">
+                <StackPanel Margin="2">
+                    <TextBlock>4th</TextBlock>
+                    <Image Style="{StaticResource LargeOutputImage}" x:Name="ImageD"/>
+                </StackPanel>
+            </Border>
+            <Button Width="60" Height="40" Click="Reset_Click">Reset</Button>
+        </DockPanel>
+    </StackPanel>
+</api:ModulePage>
