@@ -1,8 +1,8 @@
 # KTANE-Assistant v0.1.0
 #### By BackwardsNode/BossWasHere
-> This is a **WIP project**
-> Complete modules: Keypads
-> Functioning modules: Simple Wires, The Button, Morse Code, Passwords
+> This is a **WIP project**<br>
+Complete modules: Keypads<br>
+Functioning modules: Simple Wires, The Button, Morse Code, Passwords
 
 Interactive bomb defusing guide and assistant for [Keep Talking and Nobody Explodes](https://keeptalkinggame.com/) by Steel Crate Games. This enables "the expert" to enter information about the bomb, and get detailed instructions back for each module, essentially making this a "cheat". It is intended to be used to improve communication between the player and the expert or for practice on harder modules.
 The original manual for the game can be found [here](http://www.bombmanual.com/).
@@ -19,7 +19,7 @@ The entry point of your library should look like this:
 public class MyModuleProvider : ExternalModuleProvider
 {
 	public override string ProjectAuthor => "BackwardsNode";
-	public override string ProjectAuthorWebsite => "https://example.com";
+	public override string ProjectAuthorWebsite => "https://github.com";
 	public override void Loaded() {}
 	public override void RegistrationOpened()
 	{
